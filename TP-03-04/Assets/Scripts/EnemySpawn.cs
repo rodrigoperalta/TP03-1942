@@ -8,18 +8,13 @@ public class EnemySpawn : EntityBase                                            
     public Vector2 spawnPoint;
     public int amountOfEnemies;
 
-
     protected override void Update()
     {
         base.Update();
         Vector2 move = Vector2.zero;
         move.y = move.y + 1;
         movement = move;                                                                 //Enemy 1 Spawner Movement
-
-
-
     }
-
 
     void OnTriggerEnter2D(Collider2D col)
     {

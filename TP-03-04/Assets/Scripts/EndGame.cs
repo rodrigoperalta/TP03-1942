@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class EndGame : EntityBase
 {
-
+    //When player collides with this GO, the game ends
 
     protected override void Update()
     {
@@ -13,9 +13,6 @@ public class EndGame : EntityBase
         Vector2 move = Vector2.zero;
         move.y = move.y + 1;
         movement = move;                                          //End game trigger movemment
-
-
-
     }
 
 

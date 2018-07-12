@@ -5,12 +5,9 @@ using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
-
     public Text score;
     public Text energy;
     public Text bombsLeft;
-
-
     
     void Update()
     {

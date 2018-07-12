@@ -12,14 +12,14 @@ public class Enemy1Controller : EntityBase                                      
     private SpriteRenderer sR;
     private BoxCollider2D bC2D;
 
-    private void Awake()
+    private void Awake() //Gets components on awake
     {
         dieParticles = GetComponentInChildren<ParticleSystem>();
         sR = GetComponent<SpriteRenderer>();       
         bC2D = GetComponent<BoxCollider2D>();
     }
 
-    protected override void Start()
+    protected override void Start() //gets audiosource
     {
         base.Start();
         aS = GetComponent<AudioSource>();
@@ -36,7 +36,7 @@ public class Enemy1Controller : EntityBase                                      
     public void Die()
     {        
         PlayerController.Get().AddScore(10);
-        aS.Play();
+        aS.Play();                              //Plays sounds, does explotion and disables the enemy
         dieParticles.Play();
         sR.enabled = !sR.enabled;
         rig.Sleep();

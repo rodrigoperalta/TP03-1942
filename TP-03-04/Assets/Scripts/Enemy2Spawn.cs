@@ -6,8 +6,6 @@ public class Enemy2Spawn : EntityBase                                           
 {
     public GameObject enemy2;
     public Vector2 spawnPoint;
-   
-
 
     protected override void Update()
     {
@@ -16,13 +14,11 @@ public class Enemy2Spawn : EntityBase                                           
         move.y = move.y + 1;
         movement = move;                                                                    //Enemy 2 spawn movement
     }
-
-
+    
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.tag == "Player")
-        {
-            
+        {            
             spawnPoint.x = this.transform.position.x + Random.Range(-11, 10);              //Sets enemy 2 spawn position
             spawnPoint.y = this.transform.position.y + Random.Range(10, 15);
             for (int i = 0; i < 5; i++)

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour {
 
+    //Handles camera shake
     public Camera mainCamera;
     float shakeAmout = 0;
     public static CameraShake cameraShake;
@@ -36,7 +37,6 @@ public class CameraShake : MonoBehaviour {
             float offsetY = Random.value * shakeAmout * 2 - shakeAmout;
             camPos.x += offsetX;
             camPos.y += offsetY;
-
             mainCamera.transform.position = camPos;
         }
     }

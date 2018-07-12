@@ -6,9 +6,10 @@ public class BulletController : EntityBase
 {
     Vector2 move;
     int bulletNumber;
+
     private void Awake()
     {
-        bulletNumber = PlayerController.Get().ReturnBulletNumber();        
+        bulletNumber = PlayerController.Get().ReturnBulletNumber();         //Sets movement for bullets
         if (bulletNumber == 1)
             move.y = 1;
         if (bulletNumber == 2)
@@ -29,12 +30,10 @@ public class BulletController : EntityBase
         BulletDirection();       
     }    
 
-    private void BulletDirection()
+    private void BulletDirection() //Controls the bullets directions
     {
-        if (bulletNumber == 1)
-        {
-            move.y = move.y + 1 * Time.deltaTime;
-        }
+        if (bulletNumber == 1)       
+            move.y = move.y + 1 * Time.deltaTime;        
         if (bulletNumber == 2)
         {
             move.y = move.y + 1 * Time.deltaTime;
@@ -45,11 +44,10 @@ public class BulletController : EntityBase
             move.y = move.y + 1 * Time.deltaTime;
             move.x = move.x - 1 * Time.deltaTime;
         }
-
         movement = move;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision) 
     {
         if (collision.gameObject.name == "BulletKiller")                   //Bullet killer collision
             Destroy(this.gameObject);

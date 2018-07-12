@@ -6,9 +6,7 @@ public class Enemy3Spawn : EntityBase                                           
 {
     public GameObject enemy3;
     public Vector2 spawnPoint;
-
-
-
+    
     protected override void Update()
     {
         base.Update();
@@ -16,8 +14,7 @@ public class Enemy3Spawn : EntityBase                                           
         move.y = move.y + 1;
         movement = move;                                                                    //Enemy 3 spawn movement
     }
-
-
+    
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.tag == "Player")

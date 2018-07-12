@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ScreenLevel : MonoBehaviour {
-
+    //Fake loading screen
     public static ScreenLevel screenLevel;
     public GameObject levelScreen;
     public Text levelT;

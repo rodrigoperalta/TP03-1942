@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : EntityBase
 {
-
     public static PlayerController player;
     public Transform bulletPrefab;
     private GameObject[] enemies;
@@ -23,8 +22,6 @@ public class PlayerController : EntityBase
     private int bulletNumber;
     private bool multiShot = false;
 
-    // public GameObject bullet;
-
     public static PlayerController Get()
     {
         return player;
@@ -32,8 +29,8 @@ public class PlayerController : EntityBase
 
     private void Awake()
     {
-        bulletNumber = 1;
-        numberOfBombs = 1;
+        bulletNumber = 1;   //Star with only 1 bullet
+        numberOfBombs = 1; 
         energy = 150;
         player = this;
         bulletScale.x = 5f;
@@ -55,13 +52,8 @@ public class PlayerController : EntityBase
         Die();
         DoNotRotate();
         movement = move;
-        
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Shoot();
-        }
-
+        if (Input.GetKeyDown(KeyCode.E))        
+            Shoot();        
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (numberOfBombs > 0)
@@ -70,36 +62,32 @@ public class PlayerController : EntityBase
                 numberOfBombs--;
             }
         }
-
-        if (startBlinking == true)
-        {
+        if (startBlinking == true)                      //Player blinks on hit        
             SpriteBlinkingEffect();
-        }
+        
     }
 
-    private void SpriteBlinkingEffect()
+    private void SpriteBlinkingEffect()            //Does blink on hit
     {
         spriteBlinkingTotalTimer += Time.deltaTime;
         if (spriteBlinkingTotalTimer >= spriteBlinkingTotalDuration)
         {
             startBlinking = false;
             spriteBlinkingTotalTimer = 0.0f;
-            this.gameObject.GetComponent<SpriteRenderer>().enabled = true;   // according to 
-                                                                             //your sprite
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = true;
             return;
         }
-
         spriteBlinkingTimer += Time.deltaTime;
         if (spriteBlinkingTimer >= spriteBlinkingMiniDuration)
         {
             spriteBlinkingTimer = 0.0f;
             if (this.gameObject.GetComponent<SpriteRenderer>().enabled == true)
             {
-                this.gameObject.GetComponent<SpriteRenderer>().enabled = false;  //make changes
+                this.gameObject.GetComponent<SpriteRenderer>().enabled = false;  
             }
             else
             {
-                this.gameObject.GetComponent<SpriteRenderer>().enabled = true;   //make changes
+                this.gameObject.GetComponent<SpriteRenderer>().enabled = true;   
             }
         }
     }
@@ -113,24 +101,21 @@ public class PlayerController : EntityBase
     {        
         Transform bullet = Instantiate(bulletPrefab, this.transform.position, Quaternion.identity) as Transform;
         bulletNumber = 1;
-        if (multiShot == true)
+        if (multiShot == true)         //If MultiShot is active, creates 2 more bullets per shot
         {
             Transform bullet2 = Instantiate(bulletPrefab, this.transform.position, Quaternion.identity) as Transform;
             bulletNumber = 2;
             Transform bullet3 = Instantiate(bulletPrefab, this.transform.position, Quaternion.identity) as Transform;
             bulletNumber = 3;
-        }
-        
+        }        
         Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         energy--;
     }
 
-    public int ReturnBulletNumber()
+    public int ReturnBulletNumber() //Returns amount of bullets so bullet controller can decide their direction
     {
         return bulletNumber;
-    }
-
-   
+    }   
 
     protected void Bomb()      //Player attack2, bomb, kill all enemies
     {
@@ -157,17 +142,14 @@ public class PlayerController : EntityBase
                 bulletScale.x = bulletScale.x + 0.5f;
                 bulletScale.y = bulletScale.y + 0.5f;
             }
-
             bulletPrefab.transform.localScale = bulletScale;
             Destroy(collision.gameObject);
         }
-
         if (collision.gameObject.tag == "PU2")      //Power up 2, gain energy
         {
             energy += 20;
             Destroy(collision.gameObject);
         }
-
         if(collision.gameObject.tag == "PU3")      //Power up 3, multishot
         {
             multiShot = true;
@@ -178,14 +160,11 @@ public class PlayerController : EntityBase
             numberOfBombs += 1;
             Destroy(collision.gameObject);
         }
-
-        if (collision.gameObject.tag == "PU5")      //Power up 4, add bomb
+        if (collision.gameObject.tag == "PU5")      //Power up 4, BulletTime
         {
             timeManager.BulletTime();
             Destroy(collision.gameObject);
         }
-       
-
         if (collision.gameObject.tag == "Enemy")    //Collision with enemy, player loses energy
         {
             energy -= 20;
@@ -197,10 +176,8 @@ public class PlayerController : EntityBase
 
     private void Die()                              //Player death condition
     {
-        if (energy < 0)
-        {
-            SceneManager.LoadScene("EndScreen");
-        }
+        if (energy < 0)        
+            SceneManager.LoadScene("EndScreen");        
     }
 
     private void DoNotRotate()                      //Prevents the player from rotating

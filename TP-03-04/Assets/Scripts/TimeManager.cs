@@ -2,7 +2,7 @@
 
 public class TimeManager : MonoBehaviour
 {
-
+    //Manages time for the slow motion
     public float slowdownFactor = 0.05f;
     public float slowdownLength = 5f;
 

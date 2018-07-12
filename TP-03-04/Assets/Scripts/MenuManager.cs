@@ -9,7 +9,6 @@ public class MenuManager : MonoBehaviour {
     {
         if (LevelManager.Get() != null)
             LevelManager.Get().Kill();
-
         SceneManager.LoadScene("Level1");
     }
 

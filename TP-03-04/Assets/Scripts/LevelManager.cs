@@ -27,8 +27,7 @@ public class LevelManager : MonoBehaviour {
     }
 
     public void NextLevel() //Sets up loading screen
-    {
-        
+    {        
         level++;
         ScreenLevel.Get().GetLevelNumber(level);
         ScreenLevel.Get().LoadingScreenOnOff();       
